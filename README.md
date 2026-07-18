@@ -1,17 +1,17 @@
 # VectorForge
 
-A high-performance local Vector Database and Retrieval-Augmented Generation (RAG) application built in C++. VectorForge combines multiple vector search algorithms with local LLM inference using Ollama to provide fast semantic search and document-based question answering through an interactive web interface.
+VectorForge is a C++-based local Vector Database and Retrieval-Augmented Generation (RAG) application. It integrates multiple vector search algorithms with Ollama for local embedding generation and LLM inference, enabling semantic search, document retrieval, and AI-powered question answering through an interactive web interface.
 
 ---
 
 ## Features
 
-- Semantic vector search
+- Semantic vector search over stored documents
 - Multiple search algorithms
   - HNSW
   - KD-Tree
   - Brute Force
-- Multiple distance metrics
+- Multiple similarity metrics
   - Cosine Similarity
   - Euclidean Distance
   - Manhattan Distance
@@ -19,7 +19,7 @@ A high-performance local Vector Database and Retrieval-Augmented Generation (RAG
 - Retrieval-Augmented Generation (RAG)
 - Interactive web dashboard
 - Search latency comparison
-- REST API for search and document management
+- REST API for document and vector management
 
 ---
 
@@ -55,53 +55,79 @@ VectorForge/
 
 ---
 
+## Workflow
+
+```
+User Query
+      │
+      ▼
+Generate Query Embedding
+(nomic-embed-text)
+      │
+      ▼
+Vector Search
+(HNSW / KD-Tree / Brute Force)
+      │
+      ▼
+Retrieve Top Matching Documents
+      │
+      ▼
+Provide Context to LLM
+(llama3.2)
+      │
+      ▼
+Generate Response
+```
+
+---
+
 ## Getting Started
 
 ### Prerequisites
 
-Install the following:
+Install the following software:
 
 - Git
 - Ollama
-- C++17 Compiler (GCC/Clang)
+- C++17 compatible compiler (GCC or Clang)
 
-### Install Ollama Models
+### Install Required Models
 
 ```bash
 ollama pull nomic-embed-text
 ollama pull llama3.2
 ```
 
-### Clone Repository
+### Clone the Repository
 
 ```bash
-git clone https://github.com/tiya707/Vector-Forge.git
-cd Vector-Forge
+git clone https://github.com/tiya707/VectorForge.git
+cd VectorForge
 ```
 
 ### Compile
 
-macOS / Linux
+**macOS / Linux**
 
 ```bash
 g++ -std=c++17 -O2 main.cpp -o db
 ```
 
-Windows
+**Windows (MinGW)**
 
 ```bash
 g++ -std=c++17 -O2 main.cpp -o db -lws2_32
 ```
 
-### Run
+### Run the Application
 
-Start Ollama if it is not already running.
+Start Ollama:
 
 ```bash
 ollama serve
 ```
 
-Run the server.
+Run the application:
 
 ```bash
 ./db
@@ -120,73 +146,47 @@ http://localhost:8080
 ### Search
 
 - Perform semantic vector search
-- Compare HNSW, KD-Tree and Brute Force
-- Choose different distance metrics
+- Compare different indexing algorithms
+- Select different similarity metrics
 - View search latency
 
 ### Documents
 
 - Insert text documents
 - Generate embeddings using Ollama
-- Store document vectors
+- Store document vectors for retrieval
 
 ### Ask AI
 
 - Ask questions about uploaded documents
-- Retrieve relevant context
-- Generate responses locally using llama3.2
+- Retrieve relevant document context
+- Generate responses using llama3.2
 
 ---
 
-## Architecture
-
-```
-User Query
-      │
-      ▼
-Embedding Model
-(nomic-embed-text)
-      │
-      ▼
-Vector Database
-(HNSW / KD-Tree / Brute Force)
-      │
-      ▼
-Top Relevant Results
-      │
-      ▼
-LLM
-(llama3.2)
-      │
-      ▼
-Generated Response
-```
-
----
-
-## REST Endpoints
+## REST API
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
-| GET | `/search` | Vector search |
-| POST | `/insert` | Insert vector |
-| DELETE | `/delete/:id` | Delete vector |
-| GET | `/items` | List vectors |
-| POST | `/doc/insert` | Insert document |
-| POST | `/doc/ask` | Ask AI |
-| GET | `/status` | Ollama status |
+| GET | `/search` | Perform vector search |
+| POST | `/insert` | Insert a vector |
+| DELETE | `/delete/:id` | Delete a vector |
+| GET | `/items` | List stored vectors |
+| POST | `/doc/insert` | Insert a document |
+| POST | `/doc/ask` | Ask questions using RAG |
+| GET | `/status` | Check Ollama server status |
 
 ---
 
 ## Future Improvements
 
-- PDF upload support
+- PDF and document upload support
 - Persistent vector storage
-- Larger datasets
+- Batch document indexing
 - Streaming LLM responses
 - User authentication
 - Dark mode
-- Performance analytics
+- Performance benchmarking dashboard
 
 ---
 
