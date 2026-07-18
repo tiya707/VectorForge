@@ -1,5 +1,10 @@
 # VectorForge
 
+![C++](https://img.shields.io/badge/C%2B%2B-17-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-orange)
+![RAG](https://img.shields.io/badge/RAG-Enabled-purple)
+
 VectorForge is a C++-based local Vector Database and Retrieval-Augmented Generation (RAG) application. It integrates multiple vector search algorithms with Ollama for local embedding generation and LLM inference, enabling semantic search, document retrieval, and AI-powered question answering through an interactive web interface.
 
 ---
