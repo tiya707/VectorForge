@@ -4,6 +4,26 @@ VectorForge is a C++-based local Vector Database and Retrieval-Augmented Generat
 
 ---
 
+## Screenshots
+
+### Home Dashboard
+
+![Home Dashboard](images/home.png)
+
+### Document Management
+
+![Document Management](images/document-insert.png)
+
+### AI-Powered Question Answering
+
+![RAG](images/rag-answer.png)
+
+### Algorithm Benchmark
+
+![Benchmark](images/benchmark.png)
+
+---
+
 ## Features
 
 - Semantic vector search over stored documents
