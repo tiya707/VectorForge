@@ -334,7 +334,7 @@ public:
 //  VECTOR DATABASE  (demo 16D index)
 // =====================================================================
 
-class VectorDB {
+class VectorForge {
     std::unordered_map<int, VectorItem> store;
     BruteForce bf;
     KDTree     kdt;
@@ -344,7 +344,7 @@ class VectorDB {
 
 public:
     const int dims;
-    explicit VectorDB(int d) : kdt(d), hnsw(16, 200), dims(d) {}
+    explicit VectorForge(int d) : kdt(d), hnsw(16, 200), dims(d) {}
 
     int insert(const std::string& meta, const std::string& cat,
                const std::vector<float>& emb, DistFn dist)
@@ -714,7 +714,7 @@ public:
 //  DEMO DATA  (16D categorical vectors)
 // =====================================================================
 
-void loadDemo(VectorDB& db) {
+void loadDemo(VectorForge& db) {
     auto dist = getDistFn("cosine");
     // Dims 0-3: CS | Dims 4-7: Math | Dims 8-11: Food | Dims 12-15: Sports
     db.insert("Linked List: nodes connected by pointers", "cs",
@@ -764,7 +764,7 @@ void loadDemo(VectorDB& db) {
 // =====================================================================
 
 int main() {
-    VectorDB   db(DIMS);
+    VectorForge   db(DIMS);
     DocumentDB docDB;
     OllamaClient ollama;
 
@@ -772,7 +772,7 @@ int main() {
 
     // Check Ollama at startup (non-fatal)
     bool ollamaUp = ollama.isAvailable();
-    std::cout << "=== VectorDB Engine ===" << std::endl;
+    std::cout << "=== VectorForge Engine ===" << std::endl;
     std::cout << "http://localhost:8080" << std::endl;
     std::cout << db.size() << " demo vectors | " << DIMS << " dims | HNSW+KD-Tree+BruteForce" << std::endl;
     std::cout << "Ollama: " << (ollamaUp ? "ONLINE" : "OFFLINE (install from ollama.com)") << std::endl;
